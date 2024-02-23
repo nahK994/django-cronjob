@@ -1,0 +1,16 @@
+version: '3'
+services:
+  
+  testjob:
+    container_name: testjob
+    image: testjob
+    build:
+      context: .
+      # dockerfile: Dockerfile
+      dockerfile: Dockerfile.ubuntu
+    restart: always
+    volumes:
+      - ./:/app
+    ports:
+      - 8000:8000
+    command: bash -c "service cron start && python3 manage.py crontab add && python3 manage.py runserver 0.0.0.0:8000"

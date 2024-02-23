@@ -1,0 +1,15 @@
+FROM ubuntu:latest
+
+USER root
+
+WORKDIR /app
+COPY . .
+
+RUN apt-get update
+RUN apt install tzdata -y
+ENV TZ=Asia/Dhaka
+RUN apt-get -y install pip
+RUN pip install -r requirements.txt
+
+RUN apt-get install apt-utils
+RUN apt-get -y install cron
